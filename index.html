@@ -18,8 +18,8 @@
     gapi.client.init({
         'apiKey': 'AIzaSyBDWr1Eeppt1WnlpOeEmvvbN-uBWhpoKD4',
         'clientId': '1062982619930-po62qsm6c30ijml508i74vukc8s6bqgn.apps.googleusercontent.com',
-        'discoveryDocs': [discoveryUrl],
-        'scope': SCOPE
+        'discoveryDocs': ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'],
+        'scope': 'https://www.googleapis.com/auth/drive.metadata.readonly'
     }).then(function () {
       GoogleAuth = gapi.auth2.getAuthInstance();
 
