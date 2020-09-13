@@ -29,8 +29,8 @@
     })
         .then(function(response) {
                 // Handle the results here (response.result has the parsed body).
-                console.log("Response", response);
-                // sendEventsToServerless(response);
+                console.log("Response", response.result);
+                sendEventsToServerless(response.result);
               },
               function(err) { console.error("Execute error", err); });
   }
@@ -44,7 +44,7 @@
         xhr.open("POST", 'https://q12va94v32.execute-api.us-east-2.amazonaws.com/default/find_meeting_time');
         xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
         xhr.setRequestHeader('Access-Control-Allow-Headers', '*');
-        xhr.setRequestHeader('Content-Type', 'text/plain');
+        xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(eventsList);
       }
 </script>
