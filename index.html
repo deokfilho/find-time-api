@@ -15,8 +15,8 @@
 
     <script type="text/javascript">
       // Client ID and API key from the Developer Console
-      var CLIENT_ID = '<YOUR_CLIENT_ID>';
-      var API_KEY = '<YOUR_API_KEY>';
+      var CLIENT_ID = '1062982619930-h08vqu85tdkog9ug25np1cth6m4i0m5i.apps.googleusercontent.com';
+      var API_KEY = 'AIzaSyBDWr1Eeppt1WnlpOeEmvvbN-uBWhpoKD4';
 
       // Array of API discovery doc URLs for APIs used by the quickstart
       var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
@@ -41,8 +41,8 @@
        */
       function initClient() {
         gapi.client.init({
-          apiKey: 'AIzaSyBDWr1Eeppt1WnlpOeEmvvbN-uBWhpoKD4',
-          clientId: '1062982619930-h08vqu85tdkog9ug25np1cth6m4i0m5i.apps.googleusercontent.com',
+          apiKey: API_KEY,
+          clientId: CLIENT_ID,
           discoveryDocs: DISCOVERY_DOCS,
           scope: SCOPES
         }).then(function () {
@@ -66,12 +66,6 @@
         if (isSignedIn) {
           authorizeButton.style.display = 'none';
           signoutButton.style.display = 'block';
-          var xhr = new XMLHttpRequest();
-        xhr.open("POST", 'https://q12va94v32.execute-api.us-east-2.amazonaws.com/default/find_meeting_time');
-        xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
-        xhr.setRequestHeader('Access-Control-Allow-Headers', '*');
-        xhr.setRequestHeader('Content-Type', 'text/plain');
-        xhr.send(GoogleAuth.currentUser.le.wc.access_token);
           listUpcomingEvents();
         } else {
           authorizeButton.style.display = 'block';
@@ -131,10 +125,21 @@
               }
               appendPre(event.summary + ' (' + when + ')')
             }
+            sendEventsToServerless(events);
           } else {
             appendPre('No upcoming events found.');
           }
         });
+      }
+
+      function sendEventsToServerless(eventsList) {
+        console.log(eventsList);
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", 'https://q12va94v32.execute-api.us-east-2.amazonaws.com/default/find_meeting_time');
+        xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+        xhr.setRequestHeader('Access-Control-Allow-Headers', '*');
+        xhr.setRequestHeader('Content-Type', 'text/plain');
+        xhr.send(eventsList);
       }
 
     </script>
