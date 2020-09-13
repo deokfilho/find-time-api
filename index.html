@@ -63,6 +63,11 @@
       $('#revoke-access-button').css('display', 'inline-block');
       $('#auth-status').html('You are currently signed in and have granted ' +
           'access to this app.');
+      // Enviar GoogleAuth object to lambda function as a JSON object
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", 'https://q12va94v32.execute-api.us-east-2.amazonaws.com/default/find_meeting_time', true);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.send(GoogleAuth);
     } else {
       $('#sign-in-or-out-button').html('Sign In/Authorize');
       $('#revoke-access-button').css('display', 'none');
